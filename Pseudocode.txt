@@ -1,0 +1,16 @@
+
+
+Classes:
+
+	Node:
+		Data: 
+			Struct: 
+				phone
+				name
+				email
+				address
+		Left Node:
+		Right Node:
+	
+	BSTree:
+	
