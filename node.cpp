@@ -7,7 +7,7 @@
 
 */
 
-#include "node.cpp"
+#include "node.hpp"
 #include <string>
 
 using namespace std;

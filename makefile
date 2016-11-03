@@ -1,3 +1,3 @@
-<Exe Name>: <All .cpp and .hpp files>
-	g++ -Wall <All .cpp files> -o <Exe Name>
-	./<Exe Name>
+Program6: node.cpp bstree.cpp main.cpp node.hpp bstree.hpp
+	g++ -Wall node.cpp bstree.cpp main.cpp -o Program6
+	./Program6

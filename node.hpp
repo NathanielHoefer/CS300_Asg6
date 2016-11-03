@@ -7,17 +7,6 @@
 
 
 
-Struct Name: ContactInfo
-	Contains phone number, name, email and complete address
-
-Data:
-	+ int mPhone
-	+ string mName
-	+ string mAddress
-	+ string mEmail
-
-
-
 Class Name: Node
 	Contains the data for a binary search tree, which in this case is a struct
 	with the phone number, name, email, and complete address
@@ -46,8 +35,11 @@ Accessor and Mutator Functions:
 #ifndef NODE_HPP_
 #define NODE_HPP_
 
+#include <string>
+
 
 using namespace std;
+
 
 
 /*****************************************************************************/

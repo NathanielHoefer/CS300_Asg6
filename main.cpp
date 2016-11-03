@@ -15,7 +15,7 @@ Functions:
 
  */
 
-#include "Default.hpp"
+#include "bstree.hpp"
 #include <string>
 
 using namespace std;
@@ -24,7 +24,21 @@ using namespace std;
 int main()
 {
 
-	// Code
+	BSTree tree;
+
+	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
+	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
+	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
+
+	tree.insert(c1);
+	tree.insert(c2);
+	tree.insert(c3);
+	tree.insert(c4);
+	tree.insert(c5);
+	tree.insert(c6);
 
 	return 0;
 }
