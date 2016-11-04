@@ -71,6 +71,9 @@ private:
 	// Contains all of the contact information within a structure
 	ContactInfo mInfo;
 
+	// Pointer to parent
+	Node* mParent;
+
 	// Pointer to left tree
 	Node* mLeftTree;
 
@@ -88,18 +91,22 @@ public:
 	Node();
 
 	// Creates a node with the contact info supplied
-	Node(ContactInfo info);
+	Node(ContactInfo info, Node* parent);
 
 
 // Accessors and Mutators
 
 	ContactInfo getInfo() { return mInfo; };
 
+	Node* getParent() { return mParent; };
+
 	Node* getLeftTree() { return mLeftTree; };
 
 	Node* getRightTree() { return mRightTree; };
 
 	void setInfo(ContactInfo info) { mInfo = info; };
+
+	void setParent(Node* ptr) { mParent = ptr; };
 
 	void setLeftTree(Node* ptr) { mLeftTree = ptr; };
 

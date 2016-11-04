@@ -40,6 +40,13 @@ int main()
 	tree.insert(c5);
 	tree.insert(c6);
 
+	tree.remove(448);
+
+	// TODO Node not deleting
+	tree.remove(99);
+	tree.remove(16);
+	tree.remove(623);
+
 	return 0;
 }
 

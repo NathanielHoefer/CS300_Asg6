@@ -32,6 +32,7 @@ using namespace std;
 		info.mEmail = "default email";
 
 		mInfo = info;
+		mParent = NULL;
 		mLeftTree = NULL;
 		mRightTree = NULL;
 	}
@@ -41,9 +42,10 @@ using namespace std;
 
 
 	// Creates a node with the contact info supplied
-	Node::Node(ContactInfo info)
+	Node::Node(ContactInfo info, Node* parent)
 	{
 		mInfo = info;
+		mParent = parent;
 		mLeftTree = NULL;
 		mRightTree = NULL;
 	}

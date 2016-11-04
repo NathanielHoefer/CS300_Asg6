@@ -150,7 +150,7 @@ public:
 //		Postcondition: If phone found, node is removed from tree and child node
 //			is inserted into the location there are children
 //		Return: True if phone found and deleted
-	bool deleteNode(int phone);
+	bool remove(int phone);
 
 
 /*****************************************************************************/
@@ -213,13 +213,55 @@ public:
 /*****************************************************************************/
 
 
+//	Returns the max value
+//		Precodition: None
+//		Postcodition: None
+//		Return: Contact information with the greatest number
+	Node* maxInfo(Node* root)
+	{
+		if ( root->getRightTree() == NULL )
+			return root;
+		else
+			return maxInfo( root->getRightTree() );
+	}
+
+
+/*****************************************************************************/
+
+
+//	Returns the min value
+//		Precodition: None
+//		Postcodition: None
+//		Return: Contact information with the smallest number
+	Node* minInfo(Node* root)
+	{
+		if ( root->getLeftTree() == NULL )
+			return root;
+		else
+			return minInfo( root->getLeftTree() );
+	}
+
+
+/*****************************************************************************/
+
+
 private:
 
 
-//	Deletes all of the nodes within the tree
+//	Adds the info beginning with a root node
 //		Precodition: None
-//		Postcodition: Tree is empty
-	Node* addNode(ContactInfo info, Node* root);
+//		Postcodition: Node is added
+	Node* addNode(ContactInfo info, Node* root, Node* parent);
+
+
+/*****************************************************************************/
+
+
+//	Finds the root with the matching phone number and deletes it
+//		Precodition: None
+//		Postcodition: Found node is deleted
+//		Return: True if node is deleted
+	bool deleteNode(int phone, Node* root);
 
 };
 

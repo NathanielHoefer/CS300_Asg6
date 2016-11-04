@@ -42,13 +42,12 @@ void BSTree::insert(ContactInfo info)
 
 	if ( isEmpty(mRoot) )
 	{
-		mRoot = new Node(info);
+		mRoot = new Node(info, NULL);
 	}
 	else
 	{
-		addNode(info, mRoot);
+		addNode(info, mRoot, mRoot);
 	}
-
 
 }
 
@@ -56,19 +55,19 @@ void BSTree::insert(ContactInfo info)
 //	Deletes all of the nodes within the tree
 //		Precodition: None
 //		Postcodition: Tree is empty
-Node* BSTree::addNode(ContactInfo info, Node* root)
+Node* BSTree::addNode(ContactInfo info, Node* root, Node* parent)
 {
 	if ( isEmpty(root) )
 	{
-		return new Node(info);
+		return new Node(info, parent);
 	}
 	else if ( info.mPhone < root->getInfo().mPhone )
 	{
-		root->setLeftTree(addNode(info, root->getLeftTree()));
+		root->setLeftTree(addNode(info, root->getLeftTree(), root));
 	}
 	else
 	{
-		root->setRightTree(addNode(info, root->getRightTree()));
+		root->setRightTree(addNode(info, root->getRightTree(), root));
 	}
 
 	return root;
@@ -83,7 +82,91 @@ Node* BSTree::addNode(ContactInfo info, Node* root)
 //		Postcondition: If phone found, node is removed from tree and child node
 //			is inserted into the location there are children
 //		Return: True if phone found and deleted
-	bool deleteNode(int phone);
+	bool BSTree::remove(int phone)
+	{
+		return deleteNode(phone, mRoot);
+	}
+
+
+/*****************************************************************************/
+
+
+//	Finds the root with the matching phone number and deletes it
+//		Precodition: None
+//		Postcodition: Found node is deleted
+//		Return: True if node is deleted
+bool BSTree::deleteNode(int phone, Node* root)
+{
+	if ( isEmpty(root) )
+	{
+		return false;
+	}
+	else if ( phone < root->getInfo().mPhone )
+	{
+		return deleteNode( phone, root->getLeftTree() );
+	}
+	else if ( phone > root->getInfo().mPhone )
+	{
+		return deleteNode( phone, root->getRightTree() );
+	}
+	else
+	{
+		Node* parent = root->getParent();
+
+		if ( root->getLeftTree() == NULL )
+		{
+
+			// Checks to see if root is top most root
+			if ( root == mRoot )
+			{
+				parent = maxInfo(root->getLeftTree());
+
+				root->setInfo(parent->getInfo());
+
+				delete parent;
+			}
+			else if ( parent->getLeftTree() == root )
+				parent->setLeftTree(root->getRightTree());
+			else
+				parent->setRightTree(root->getRightTree());
+
+			delete root;
+		}
+		else if ( root->getRightTree() == NULL )
+		{
+
+			// Checks to see if root is top most root
+			if ( root == mRoot )
+			{
+				parent = maxInfo(root->getLeftTree());
+
+				root->setInfo(parent->getInfo());
+
+				delete parent;
+			}
+			else if ( parent->getLeftTree() == root )
+				parent->setLeftTree(root->getLeftTree());
+			else
+				parent->setRightTree(root->getLeftTree());
+
+			delete root;
+		}
+		else
+		{
+			// Locates the node with the largest data value in the left subtree
+			Node* ptr = maxInfo(root->getLeftTree());
+
+			// Transfers the data from the largest node to the current root,
+			// overriding the current info
+			root->setInfo(ptr->getInfo());
+
+			// Deletes the largest node
+			delete ptr;
+		}
+
+		return true;
+	}
+}
 
 
 /*****************************************************************************/
