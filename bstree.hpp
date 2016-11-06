@@ -170,7 +170,7 @@ public:
 //	Prints the contact info in preorder
 //		Precondition: None
 //		Postcondition: Contact info is printed to console in preorder
-	void traversePre();
+	bool traversePre( Node* root );
 
 
 /*****************************************************************************/
@@ -179,7 +179,7 @@ public:
 //	Prints the contact info in inorder
 //		Precondition: None
 //		Postcondition: Contact info is printed to console in inorder
-	void traverseIn();
+	bool traverseIn( Node* root );
 
 
 /*****************************************************************************/
@@ -188,7 +188,7 @@ public:
 //	Prints the contact info in postorder
 //		Precondition: None
 //		Postcondition: Contact info is printed to console in postorder
-	void traversePost();
+	bool traversePost( Node* root );
 
 
 /*****************************************************************************/
