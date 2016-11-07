@@ -26,10 +26,12 @@ int main()
 {
 
 
-
+	bool isFinished = false;
+	int selection = 0;
 
 	BSTree tree;
 
+	// Test Info
 	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
 	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
 	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
@@ -43,6 +45,99 @@ int main()
 	tree.insert(c4);
 	tree.insert(c5);
 	tree.insert(c6);
+
+	while (!isFinished)
+	{
+
+		cout << "Binary Search Tree Application - Program 6" << endl;
+		cout << "Please make a selection" << endl << endl;
+
+		cout << "1. Add Contact Information" << endl;
+		cout << "2. Delete a Telephone Number" << endl;
+		cout << "3. Locate a Telephone Number" << endl;
+		cout << "4. Traverse List: In-order" << endl;
+		cout << "5. Traverse List: Pre-order" << endl;
+		cout << "6. Traverse List: Post-order" << endl;
+		cout << "7. Quit" << endl;
+
+
+		cin >> selection;
+
+		if ( selection > 0 && selection <= 7)
+		{
+			switch (selection) {
+				// Add contact
+				case 1:
+				{
+					ContactInfo info;
+
+					cout << "Enter Phone Number: " << endl;
+					cin >> info.mPhone;
+					cout << "Enter Name: " << endl;
+					cin >> info.mName;
+					cout << "Enter Address: " << endl;
+					cin >> info.mAddress;
+					cout << "Ender Email: " << endl;
+					cin >> info.mEmail;
+
+					tree.insert(info);
+
+					break;
+				}
+
+				// Delete contact
+				case 2:
+				{
+					break;
+				}
+
+				// Locate contact
+				case 3:
+				{
+					break;
+				}
+
+				// Traverse in-order
+				case 4:
+				{
+					cout << "\nIn-order Traversal:\n" << endl;
+					tree.traverseIn( tree.getRoot() );
+					cout << endl;
+					break;
+				}
+
+				// Traverse pre-order
+				case 5:
+				{
+					cout << "\nPre-order Traversal:\n" << endl;
+					tree.traversePre( tree.getRoot() );
+					cout << endl << endl;
+					break;
+				}
+
+				// Traverse post-order
+				case 6:
+				{
+					cout << "\nPost-order Traversal:\n" << endl;
+					tree.traversePost( tree.getRoot() );
+					cout << endl;
+					break;
+				}
+
+				// Quit and save
+				case 7:
+				{
+					break;
+				}
+			}
+		}
+		else
+		{
+			cout << "Invalid response" << endl;
+		}
+
+	}
+
 
 	cout << "***In order***" << endl;
 	tree.traverseIn( tree.getRoot() );
