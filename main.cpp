@@ -31,6 +31,21 @@ int main()
 
 	BSTree tree;
 
+	// Test Info
+	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
+	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
+	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
+
+	tree.insert(c1);
+	tree.insert(c2);
+	tree.insert(c3);
+	tree.insert(c4);
+	tree.insert(c5);
+	tree.insert(c6);
+
 	while (!isFinished)
 	{
 
@@ -76,7 +91,6 @@ int main()
 					break;
 				}
 
-
 				// Locate contact
 				case 3:
 				{
@@ -86,18 +100,27 @@ int main()
 				// Traverse in-order
 				case 4:
 				{
+					cout << "\nIn-order Traversal:\n" << endl;
+					tree.traverseIn( tree.getRoot() );
+					cout << endl;
 					break;
 				}
 
 				// Traverse pre-order
 				case 5:
 				{
+					cout << "\nPre-order Traversal:\n" << endl;
+					tree.traversePre( tree.getRoot() );
+					cout << endl << endl;
 					break;
 				}
 
 				// Traverse post-order
 				case 6:
 				{
+					cout << "\nPost-order Traversal:\n" << endl;
+					tree.traversePost( tree.getRoot() );
+					cout << endl;
 					break;
 				}
 
@@ -115,21 +138,6 @@ int main()
 
 	}
 
-
-
-	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
-	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
-	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
-
-	tree.insert(c1);
-	tree.insert(c2);
-	tree.insert(c3);
-	tree.insert(c4);
-	tree.insert(c5);
-	tree.insert(c6);
 
 	cout << "***In order***" << endl;
 	tree.traverseIn( tree.getRoot() );
