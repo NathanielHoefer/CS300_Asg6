@@ -47,34 +47,46 @@ int main()
 	cout << "***In order***" << endl;
 	tree.traverseIn( tree.getRoot() );
 
+	tree.retrieve(448);
+	tree.retrieve(64);
+	tree.retrieve(99);
+	tree.retrieve(449);
+
+	tree.destroy( tree.getRoot() );
+
+	cout << "***In order***" << endl;
+	tree.traverseIn( tree.getRoot() );
+
+
+
 //	cout << "\n***Post order***" << endl;
 //	tree.traversePost( tree.getRoot() );
 //
 //	cout << "\n***Pre order***"<< endl;
 //	tree.traversePre( tree.getRoot() );
 
-	cout << "\n" << tree.remove(448) << endl; // Works correctly
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(99) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(16) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(64) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(623) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(89) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "\n" << tree.remove(88) << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	cout << "" << endl;
+//	cout << "\n" << tree.remove(448) << endl; // Works correctly
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(99) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(16) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(64) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(623) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(89) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(88) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "" << endl;
 
 	return 0;
 }

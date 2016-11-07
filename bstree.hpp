@@ -160,8 +160,19 @@ public:
 //		returns the info.
 //		Precondition: None
 //		Postcondition: None
-//		Return: Contact info with the phone number
-	ContactInfo retrieve(int phone);
+//		Return: Prints the contact info if found
+	void retrieve(int phone);
+
+
+/*****************************************************************************/
+
+
+//	Locates the contact information containing the phone number entered and
+//		returns the info.
+//		Precondition: None
+//		Postcondition: None
+//		Return: Node with the contact information
+	Node* findNode(int phone, Node* root);
 
 
 /*****************************************************************************/
@@ -207,7 +218,7 @@ public:
 //	Deletes all of the nodes within the tree
 //		Precodition: None
 //		Postcodition: Tree is empty
-	void destroy();
+	bool destroy( Node* root );
 
 
 /*****************************************************************************/

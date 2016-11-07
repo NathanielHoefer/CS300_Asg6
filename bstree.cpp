@@ -171,6 +171,10 @@ bool BSTree::deleteNode(int phone, Node* root)
 				// Sets replaces the parent right node with NULL
 				ptr->getParent()->setRightTree(NULL);
 
+//				// if the max node is directly under root
+//				if ( root->getLeftTree() == ptr)
+//					root->setLeftTree(ptr->getLeftTree());
+
 				// Updates the root info to max info
 				root->setInfo(ptr->getInfo());
 
@@ -225,9 +229,48 @@ bool BSTree::deleteNode(int phone, Node* root)
 //	Locates the contact information containing the phone number entered and
 //		returns the info.
 //		Precondition: None
+//		Postcondition: Prints the contact info if found
+void BSTree::retrieve(int phone)
+{
+	Node* root = findNode(phone, mRoot);
+	if ( root == NULL )
+	{
+		cout << "Number not found" << endl;
+	}
+	else
+	{
+		cout << "Telephone Number:" << endl;
+		cout << root->getInfo().mPhone << endl;
+		cout << "Name:" << endl;
+		cout << root->getInfo().mName << endl;
+		cout << "Address:" << endl;
+		cout << root->getInfo().mAddress << endl;
+		cout << "Email:" << endl;
+		cout << root->getInfo().mEmail << endl << endl;
+	}
+}
+
+
+/*****************************************************************************/
+
+
+//	Locates the contact information containing the phone number entered and
+//		returns the info.
+//		Precondition: None
 //		Postcondition: None
-//		Return: Contact info with the phone number
-	ContactInfo retrieve(int phone);
+//		Return: Node with the contact information
+Node* BSTree::findNode(int phone, Node* root)
+{
+	if ( root != NULL )
+	{
+		if ( phone < root->getInfo().mPhone )
+			return findNode( phone, root->getLeftTree());
+		else if ( phone > root->getInfo().mPhone )
+			return findNode( phone, root->getRightTree());
+	}
+	return root;
+}
+
 
 
 /*****************************************************************************/
@@ -337,6 +380,18 @@ bool BSTree::isEmpty(Node* root)
 //	Deletes all of the nodes within the tree
 //		Precodition: None
 //		Postcodition: Tree is empty
-	void destroy();
+bool BSTree::destroy( Node* root )
+{
+	if ( root->getLeftTree() != NULL )
+		return destroy(root->getLeftTree());
+	if ( root->getRightTree() != NULL )
+		return destroy(root->getRightTree());
+	delete root;
+	return true;
+
+
+
+}
+
 
 
