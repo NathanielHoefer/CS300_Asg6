@@ -10,9 +10,17 @@ Description of the Problem:
 	<Desc>
 
 Functions:
-    + main() - <Desc>
-    	> <Steps>
-
+    + main() - Begins the application loop
+    	> Create empty tree
+    	> Begin loop and print menu options
+    	> 1. Add Contact Information
+    	> 2. Delete a Telephone Number
+    	> 3. Locate a Telephone Number
+    	> 4. Traverse List: In-order
+    	> 5. Traverse List: Pre-order
+    	> 6. Traverse List: Post-order
+    	> 7. Quit
+    	> When quit option is selected, Save the tree to an indented format.
  */
 
 #include "bstree.hpp"
@@ -21,7 +29,6 @@ Functions:
 #include <fstream>
 
 using namespace std;
-
 
 int main()
 {

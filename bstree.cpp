@@ -241,11 +241,18 @@ bool BSTree::deleteNode(int phone, Node* root)
 			cout << root->getInfo().mName << " deleted\n" << endl;
 
 			// Locates the node with the largest data value in the left subtree
-			Node* ptr = maxInfo(root->getLeftTree());
+			ptr = maxInfo(root->getLeftTree());
 
-
-			// Sets replaces the parent right node with NULL
-			ptr->getParent()->setRightTree(NULL);
+			// Checks to see if parent of the pointer is the root
+			if (ptr->getParent() == root)
+			{
+				root->setLeftTree(NULL);
+			}
+			else
+			{
+				// Sets replaces the parent right node with NULL
+				ptr->getParent()->setRightTree(NULL);
+			}
 
 
 			// Transfers the data from the largest node to the current root,
