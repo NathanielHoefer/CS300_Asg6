@@ -39,6 +39,7 @@ int main()
 	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
 	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
 	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
+	ContactInfo c7 = {103, "three", "fish St", "3@hotmail.com"};
 
 	tree.insert(c1);
 	tree.insert(c2);
@@ -46,6 +47,41 @@ int main()
 	tree.insert(c4);
 	tree.insert(c5);
 	tree.insert(c6);
+	tree.insert(c7);
+//
+//	cout << "\nCount: " << tree.getCount() << endl;
+//
+//
+//
+//	cout << "\n" << tree.remove(448) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(64) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(89) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(88) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(99) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(448) << endl; // Works correctly
+//	tree.traverseIn( tree.getRoot() );
+//
+//	cout << "\n" << tree.remove(623) << endl;
+//	tree.traverseIn( tree.getRoot() );
+//
+//
+//
+//	cout << "\nCount: " << tree.getCount() << endl;
+//
+//	tree.destroy( tree.getRoot() );
+
+
+
 
 	while (!isFinished)
 	{
@@ -89,6 +125,11 @@ int main()
 				// Delete contact
 				case 2:
 				{
+					int phone;
+
+					cout << "Enter phone number to delete: ";
+					cin >> phone;
+					tree.remove(phone);
 					break;
 				}
 
@@ -156,55 +197,15 @@ int main()
 	}
 	saveFile.close();
 
+
+	if (!tree.isEmpty(tree.getRoot()))
+	{
+		tree.destroy( tree.getRoot() );
+	}
+
 	cout << "\nFile Saved" << endl;
 
 	return 0;
-
-
-
-	cout << "***In order***" << endl;
-	tree.traverseIn( tree.getRoot() );
-
-	tree.retrieve(448);
-	tree.retrieve(64);
-	tree.retrieve(99);
-	tree.retrieve(449);
-
-	tree.destroy( tree.getRoot() );
-
-	cout << "***In order***" << endl;
-	tree.traverseIn( tree.getRoot() );
-
-
-
-//	cout << "\n***Post order***" << endl;
-//	tree.traversePost( tree.getRoot() );
-//
-//	cout << "\n***Pre order***"<< endl;
-//	tree.traversePre( tree.getRoot() );
-
-//	cout << "\n" << tree.remove(448) << endl; // Works correctly
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(99) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(16) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(64) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(623) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(89) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(88) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "" << endl;
 
 
 }

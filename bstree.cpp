@@ -45,6 +45,7 @@ void BSTree::insert(ContactInfo info)
 	if ( isEmpty(mRoot) )
 	{
 		mRoot = new Node(info, NULL);
+		mCount++;
 	}
 	else
 	{
@@ -61,19 +62,17 @@ Node* BSTree::addNode(ContactInfo info, Node* root, Node* parent)
 {
 	if ( isEmpty(root) )
 	{
+		mCount++;
 		return new Node(info, parent);
 	}
 	else if ( info.mPhone < root->getInfo().mPhone )
 	{
 		root->setLeftTree(addNode(info, root->getLeftTree(), root));
-		mCount++;
 	}
 	else
 	{
 		root->setRightTree(addNode(info, root->getRightTree(), root));
-		mCount++;
 	}
-
 	return root;
 }
 
@@ -118,28 +117,50 @@ bool BSTree::deleteNode(int phone, Node* root)
 		Node* parent = root->getParent();
 		Node* ptr;
 
+		// Root only has right child
 		if ( root->getLeftTree() == NULL )
 		{
 
 			// Checks to see if root is top most root
 			if ( root == mRoot )
 			{
-				// grabs node with largest value
-				ptr = maxInfo(root->getLeftTree());
 
-				// Sets replaces the parent right node with NULL
-				ptr->getParent()->setRightTree(NULL);
+				// Root is only node left to be deleted
+				if (root->getRightTree() == NULL)
+				{
+					cout << root->getInfo().mName << " deleted\n" << endl;
+					delete root;
+					mRoot = NULL;
+				}
+				else
+				{
+					// grabs node with largest value
+					ptr = minInfo(mRoot->getRightTree());
 
-				// Updates the root info to max info
-				root->setInfo(ptr->getInfo());
+					// Sets the parent's pointer to NULL
+					if (ptr->getParent()->getLeftTree() == ptr )
+						ptr->getParent()->setLeftTree(NULL);
+					// Only one node left from root
+					else if (ptr == maxInfo(ptr->getParent()))
+						mRoot->setRightTree(NULL);
+					else
+						ptr->getParent()->setRightTree(ptr->getRightTree());
 
-				// Deletes max node since that info replaced the root
-				delete ptr;
+					// Updates the root info to max info
+					mRoot->setInfo(ptr->getInfo());
+
+					cout << root->getInfo().mName << " deleted\n" << endl;
+					// Deletes max node since that info replaced the root
+					delete ptr;
+				}
+
 			}
 			// If the root is the left child of the parent, update the parent's
 			// left node to the left child of the root.
 			else if ( parent->getLeftTree() == root )
 			{
+				cout << root->getInfo().mName << " deleted\n" << endl;
+
 				parent->setLeftTree(root->getRightTree());
 
 				if ( root->getRightTree() != NULL )
@@ -151,6 +172,8 @@ bool BSTree::deleteNode(int phone, Node* root)
 			// right node to the left child of the root.
 			else
 			{
+				cout << root->getInfo().mName << " deleted\n" << endl;
+
 				parent->setRightTree(root->getRightTree());
 
 				if ( root->getRightTree() != NULL )
@@ -160,14 +183,17 @@ bool BSTree::deleteNode(int phone, Node* root)
 			}
 
 		}
+		// Root only has left child
 		else if ( root->getRightTree() == NULL )
 		{
 
 			// Checks to see if root is top most root
 			if ( root == mRoot )
 			{
+				cout << root->getInfo().mName << " deleted\n" << endl;
+
 				// grabs node with largest value
-				ptr = maxInfo(root->getLeftTree());
+				ptr = maxInfo(mRoot->getLeftTree());
 
 				// Sets replaces the parent right node with NULL
 				ptr->getParent()->setRightTree(NULL);
@@ -177,13 +203,17 @@ bool BSTree::deleteNode(int phone, Node* root)
 //					root->setLeftTree(ptr->getLeftTree());
 
 				// Updates the root info to max info
-				root->setInfo(ptr->getInfo());
+				mRoot->setInfo(ptr->getInfo());
+
+				ptr->getParent()->setRightTree(NULL);
 
 				// Deletes max node since that info replaced the root
 				delete ptr;
 			}
 			else if ( parent->getLeftTree() == root )
 			{
+				cout << root->getInfo().mName << " deleted\n" << endl;
+
 				parent->setLeftTree(root->getLeftTree());
 
 				if ( root->getLeftTree() != NULL )
@@ -194,6 +224,8 @@ bool BSTree::deleteNode(int phone, Node* root)
 
 			else
 			{
+				cout << root->getInfo().mName << " deleted\n" << endl;
+
 				parent->setRightTree(root->getLeftTree());
 
 				if ( root->getLeftTree() != NULL )
@@ -203,13 +235,18 @@ bool BSTree::deleteNode(int phone, Node* root)
 			}
 
 		}
+		// Root has two children
 		else
 		{
+			cout << root->getInfo().mName << " deleted\n" << endl;
+
 			// Locates the node with the largest data value in the left subtree
 			Node* ptr = maxInfo(root->getLeftTree());
 
+
 			// Sets replaces the parent right node with NULL
 			ptr->getParent()->setRightTree(NULL);
+
 
 			// Transfers the data from the largest node to the current root,
 			// overriding the current info
@@ -219,6 +256,7 @@ bool BSTree::deleteNode(int phone, Node* root)
 			delete ptr;
 		}
 
+		mCount--;
 		return true;
 	}
 }
@@ -282,22 +320,28 @@ Node* BSTree::findNode(int phone, Node* root)
 //		Postcondition: Contact info is printed to console in preorder
 	bool BSTree::traversePre( Node* root )
 	{
-		cout << "- Telephone Number:" << endl;
-		cout << root->getInfo().mPhone << endl;
-		cout << "- Name:" << endl;
-		cout << root->getInfo().mName << endl;
-		cout << "- Address:" << endl;
-		cout << root->getInfo().mAddress << endl;
-		cout << "- Email:" << endl;
-		cout << root->getInfo().mEmail << endl << endl;
+		if ( !isEmpty(root) )
+		{
+			cout << "- Telephone Number:" << endl;
+			cout << root->getInfo().mPhone << endl;
+			cout << "- Name:" << endl;
+			cout << root->getInfo().mName << endl;
+			cout << "- Address:" << endl;
+			cout << root->getInfo().mAddress << endl;
+			cout << "- Email:" << endl;
+			cout << root->getInfo().mEmail << endl << endl;
 
-		if ( root->getLeftTree() != NULL )
-			traversePre( root->getLeftTree() );
+			if ( root->getLeftTree() != NULL )
+				traversePre( root->getLeftTree() );
 
-		if ( root->getRightTree() != NULL )
-			traversePre( root->getRightTree() );
+			if ( root->getRightTree() != NULL )
+				traversePre( root->getRightTree() );
 
-		return true;
+			return true;
+		}
+		else
+			cout << "Tree is Empty." << endl << endl;
+			return false;
 	}
 
 
@@ -309,22 +353,29 @@ Node* BSTree::findNode(int phone, Node* root)
 //		Postcondition: Contact info is printed to console in inorder
 	bool BSTree::traverseIn( Node* root )
 	{
-		if ( root->getLeftTree() != NULL )
-			traverseIn( root->getLeftTree() );
+		if ( !isEmpty(root) )
+		{
+			if ( root->getLeftTree() != NULL )
+				traverseIn( root->getLeftTree() );
 
-//		cout << "- Telephone Number:" << endl;
-		cout << root->getInfo().mPhone << " ";
-//		cout << "- Name:" << endl;
-//		cout << root->getInfo().mName << endl;
-//		cout << "- Address:" << endl;
-//		cout << root->getInfo().mAddress << endl;
-//		cout << "- Email:" << endl;
-//		cout << root->getInfo().mEmail << endl << endl;
+	//		cout << "- Telephone Number:" << endl;
+			cout << root->getInfo().mPhone << " ";
+	//		cout << "- Name:" << endl;
+	//		cout << root->getInfo().mName << endl;
+	//		cout << "- Address:" << endl;
+	//		cout << root->getInfo().mAddress << endl;
+	//		cout << "- Email:" << endl;
+	//		cout << root->getInfo().mEmail << endl << endl;
 
-		if ( root->getRightTree() != NULL )
-			traverseIn( root->getRightTree() );
+			if ( root->getRightTree() != NULL )
+				traverseIn( root->getRightTree() );
 
-		return true;
+			return true;
+		}
+		else
+			cout << "Tree is Empty." << endl << endl;
+			return false;
+
 	}
 
 
@@ -336,22 +387,28 @@ Node* BSTree::findNode(int phone, Node* root)
 //		Postcondition: Contact info is printed to console in postorder
 	bool BSTree::traversePost( Node* root )
 	{
-		if ( root->getLeftTree() != NULL )
-			traversePost( root->getLeftTree() );
+		if ( !isEmpty(root) )
+		{
+			if ( root->getLeftTree() != NULL )
+				traversePost( root->getLeftTree() );
 
-		if ( root->getRightTree() != NULL )
-			traversePost( root->getRightTree() );
+			if ( root->getRightTree() != NULL )
+				traversePost( root->getRightTree() );
 
-		cout << "- Telephone Number:" << endl;
-		cout << root->getInfo().mPhone << endl;
-		cout << "- Name:" << endl;
-		cout << root->getInfo().mName << endl;
-		cout << "- Address:" << endl;
-		cout << root->getInfo().mAddress << endl;
-		cout << "- Email:" << endl;
-		cout << root->getInfo().mEmail << endl << endl;
+			cout << "- Telephone Number:" << endl;
+			cout << root->getInfo().mPhone << endl;
+			cout << "- Name:" << endl;
+			cout << root->getInfo().mName << endl;
+			cout << "- Address:" << endl;
+			cout << root->getInfo().mAddress << endl;
+			cout << "- Email:" << endl;
+			cout << root->getInfo().mEmail << endl << endl;
 
-		return true;
+			return true;
+		}
+		else
+			cout << "Tree is Empty." << endl << endl;
+			return false;
 	}
 
 
@@ -413,15 +470,13 @@ bool BSTree::isEmpty(Node* root)
 //		Postcodition: Tree is empty
 bool BSTree::destroy( Node* root )
 {
-	if ( root->getLeftTree() != NULL )
-		return destroy(root->getLeftTree());
-	if ( root->getRightTree() != NULL )
-		return destroy(root->getRightTree());
-	delete root;
-	return true;
-
-
-
+		if ( root->getLeftTree() != NULL )
+			destroy(root->getLeftTree());
+		if ( root->getRightTree() != NULL )
+			destroy(root->getRightTree());
+		mCount--;
+		delete root;
+		return true;
 }
 
 
