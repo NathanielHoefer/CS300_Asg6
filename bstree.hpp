@@ -223,7 +223,16 @@ public:
 
 /*****************************************************************************/
 
-s
+
+//	Deletes all of the nodes within the tree
+//		Precodition: None
+//		Postcodition: Tree is saved to a file using indented notation
+	bool saveTree( Node* root, int depth, ofstream& saveFile );
+
+
+/*****************************************************************************/
+
+
 //	Returns the max value
 //		Precodition: None
 //		Postcodition: None

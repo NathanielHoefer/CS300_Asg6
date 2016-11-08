@@ -11,6 +11,7 @@
 #include "bstree.hpp"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -235,11 +236,11 @@ void BSTree::retrieve(int phone)
 	Node* root = findNode(phone, mRoot);
 	if ( root == NULL )
 	{
-		cout << "Number not found" << endl;
+		cout << "Number not found" << endl << endl;
 	}
 	else
 	{
-		cout << "Telephone Number:" << endl;
+		cout << "\nTelephone Number:" << endl;
 		cout << root->getInfo().mPhone << endl;
 		cout << "Name:" << endl;
 		cout << root->getInfo().mName << endl;
@@ -281,13 +282,13 @@ Node* BSTree::findNode(int phone, Node* root)
 //		Postcondition: Contact info is printed to console in preorder
 	bool BSTree::traversePre( Node* root )
 	{
-		cout << "Telephone Number:" << endl;
+		cout << "- Telephone Number:" << endl;
 		cout << root->getInfo().mPhone << endl;
-		cout << "Name:" << endl;
+		cout << "- Name:" << endl;
 		cout << root->getInfo().mName << endl;
-		cout << "Address:" << endl;
+		cout << "- Address:" << endl;
 		cout << root->getInfo().mAddress << endl;
-		cout << "Email:" << endl;
+		cout << "- Email:" << endl;
 		cout << root->getInfo().mEmail << endl << endl;
 
 		if ( root->getLeftTree() != NULL )
@@ -311,13 +312,13 @@ Node* BSTree::findNode(int phone, Node* root)
 		if ( root->getLeftTree() != NULL )
 			traverseIn( root->getLeftTree() );
 
-//		cout << "Telephone Number:" << endl;
+//		cout << "- Telephone Number:" << endl;
 		cout << root->getInfo().mPhone << " ";
-//		cout << "Name:" << endl;
+//		cout << "- Name:" << endl;
 //		cout << root->getInfo().mName << endl;
-//		cout << "Address:" << endl;
+//		cout << "- Address:" << endl;
 //		cout << root->getInfo().mAddress << endl;
-//		cout << "Email:" << endl;
+//		cout << "- Email:" << endl;
 //		cout << root->getInfo().mEmail << endl << endl;
 
 		if ( root->getRightTree() != NULL )
@@ -341,17 +342,47 @@ Node* BSTree::findNode(int phone, Node* root)
 		if ( root->getRightTree() != NULL )
 			traversePost( root->getRightTree() );
 
-		cout << "Telephone Number:" << endl;
+		cout << "- Telephone Number:" << endl;
 		cout << root->getInfo().mPhone << endl;
-		cout << "Name:" << endl;
+		cout << "- Name:" << endl;
 		cout << root->getInfo().mName << endl;
-		cout << "Address:" << endl;
+		cout << "- Address:" << endl;
 		cout << root->getInfo().mAddress << endl;
-		cout << "Email:" << endl;
+		cout << "- Email:" << endl;
 		cout << root->getInfo().mEmail << endl << endl;
 
 		return true;
 	}
+
+
+/*****************************************************************************/
+
+
+//	Saves tree to file
+//		Precodition: None
+//		Postcodition: Tree is saved to a file using indented notation
+bool BSTree::saveTree( Node* root, int depth, ofstream& saveFile )
+{
+	string output = "";
+
+	// Adds tabs based on the depth
+	for ( int i = 0; i < depth; i++ )
+		output += "\t";
+
+	saveFile << output << root->getInfo().mPhone << endl;
+	saveFile << output << root->getInfo().mName << endl;
+	saveFile << output << root->getInfo().mAddress << endl;
+	saveFile << output << root->getInfo().mEmail << endl;
+
+	if ( root->getLeftTree() != NULL )
+		saveTree( root->getLeftTree(), depth + 1, saveFile );
+
+	if ( root->getRightTree() != NULL )
+		saveTree( root->getRightTree(), depth + 1, saveFile );
+
+	return true;
+
+}
 
 
 /*****************************************************************************/

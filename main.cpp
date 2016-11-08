@@ -18,6 +18,7 @@ Functions:
 #include "bstree.hpp"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -94,6 +95,11 @@ int main()
 				// Locate contact
 				case 3:
 				{
+					int phone;
+
+					cout << "Enter phone number: ";
+					cin >> phone;
+					tree.retrieve(phone);
 					break;
 				}
 
@@ -127,6 +133,8 @@ int main()
 				// Quit and save
 				case 7:
 				{
+					cout << "Exiting Program." << endl;
+					isFinished = true;
 					break;
 				}
 			}
@@ -137,6 +145,21 @@ int main()
 		}
 
 	}
+
+	string fileName = "tree.dat";
+
+	// Opens Text file and saves each part until inventory is complete.
+	ofstream saveFile(fileName.c_str());
+	if (saveFile.is_open())
+	{
+		tree.saveTree(tree.getRoot(), 0, saveFile);
+	}
+	saveFile.close();
+
+	cout << "\nFile Saved" << endl;
+
+	return 0;
+
 
 
 	cout << "***In order***" << endl;
@@ -183,7 +206,7 @@ int main()
 //
 //	cout << "" << endl;
 
-	return 0;
+
 }
 
 
