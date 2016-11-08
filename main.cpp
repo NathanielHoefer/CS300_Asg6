@@ -1,13 +1,13 @@
 /*****************************************************************************/
-/* Program 5 - Decimal to Binary Converter									 */
+/* Program 6 - Binary Search Tree											 */
 /*****************************************************************************
     Author: Nathaniel Hoefer
     Student ID: X529U639
-    Program: #5
+    Program: #6
 
 
 Description of the Problem:
-	<Desc>
+	Create an application to manipulate contact information using a BST
 
 Functions:
     + main() - Begins the application loop
@@ -40,54 +40,21 @@ int main()
 	BSTree tree;
 
 	// Test Info
-	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
-	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
-	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
-	ContactInfo c7 = {103, "three", "fish St", "3@hotmail.com"};
-
-	tree.insert(c1);
-	tree.insert(c2);
-	tree.insert(c3);
-	tree.insert(c4);
-	tree.insert(c5);
-	tree.insert(c6);
-	tree.insert(c7);
+//	ContactInfo c1 = {99, "one", "116 St", "1@hotmail.com"};
+//	ContactInfo c2 = {88, "two", "Car St", "2@hotmail.com"};
+//	ContactInfo c3 = {448, "three", "fish St", "3@hotmail.com"};
+//	ContactInfo c4 = {64, "three", "fish St", "3@hotmail.com"};
+//	ContactInfo c5 = {89, "three", "fish St", "3@hotmail.com"};
+//	ContactInfo c6 = {623, "three", "fish St", "3@hotmail.com"};
+//	ContactInfo c7 = {103, "three", "fish St", "3@hotmail.com"};
 //
-//	cout << "\nCount: " << tree.getCount() << endl;
-//
-//
-//
-//	cout << "\n" << tree.remove(448) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(64) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(89) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(88) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(99) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(448) << endl; // Works correctly
-//	tree.traverseIn( tree.getRoot() );
-//
-//	cout << "\n" << tree.remove(623) << endl;
-//	tree.traverseIn( tree.getRoot() );
-//
-//
-//
-//	cout << "\nCount: " << tree.getCount() << endl;
-//
-//	tree.destroy( tree.getRoot() );
-
-
+//	tree.insert(c1);
+//	tree.insert(c2);
+//	tree.insert(c3);
+//	tree.insert(c4);
+//	tree.insert(c5);
+//	tree.insert(c6);
+//	tree.insert(c7);
 
 
 	while (!isFinished)
@@ -103,7 +70,6 @@ int main()
 		cout << "5. Traverse List: Pre-order" << endl;
 		cout << "6. Traverse List: Post-order" << endl;
 		cout << "7. Quit" << endl;
-
 
 		cin >> selection;
 

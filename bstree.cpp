@@ -198,10 +198,6 @@ bool BSTree::deleteNode(int phone, Node* root)
 				// Sets replaces the parent right node with NULL
 				ptr->getParent()->setRightTree(NULL);
 
-//				// if the max node is directly under root
-//				if ( root->getLeftTree() == ptr)
-//					root->setLeftTree(ptr->getLeftTree());
-
 				// Updates the root info to max info
 				mRoot->setInfo(ptr->getInfo());
 
@@ -236,31 +232,22 @@ bool BSTree::deleteNode(int phone, Node* root)
 
 		}
 		// Root has two children
+		// Switches max and root info and then recursively deletes the number in
+		// the new location
 		else
 		{
-			cout << root->getInfo().mName << " deleted\n" << endl;
+			ContactInfo cTemp = root->getInfo();
 
 			// Locates the node with the largest data value in the left subtree
 			ptr = maxInfo(root->getLeftTree());
-
-			// Checks to see if parent of the pointer is the root
-			if (ptr->getParent() == root)
-			{
-				root->setLeftTree(NULL);
-			}
-			else
-			{
-				// Sets replaces the parent right node with NULL
-				ptr->getParent()->setRightTree(NULL);
-			}
-
 
 			// Transfers the data from the largest node to the current root,
 			// overriding the current info
 			root->setInfo(ptr->getInfo());
 
-			// Deletes the largest node
-			delete ptr;
+			ptr->setInfo(cTemp);
+
+			deleteNode(phone, root->getLeftTree());
 		}
 
 		mCount--;
@@ -365,14 +352,14 @@ Node* BSTree::findNode(int phone, Node* root)
 			if ( root->getLeftTree() != NULL )
 				traverseIn( root->getLeftTree() );
 
-	//		cout << "- Telephone Number:" << endl;
-			cout << root->getInfo().mPhone << " ";
-	//		cout << "- Name:" << endl;
-	//		cout << root->getInfo().mName << endl;
-	//		cout << "- Address:" << endl;
-	//		cout << root->getInfo().mAddress << endl;
-	//		cout << "- Email:" << endl;
-	//		cout << root->getInfo().mEmail << endl << endl;
+			cout << "- Telephone Number:" << endl;
+			cout << root->getInfo().mPhone << endl;
+			cout << "- Name:" << endl;
+			cout << root->getInfo().mName << endl;
+			cout << "- Address:" << endl;
+			cout << root->getInfo().mAddress << endl;
+			cout << "- Email:" << endl;
+			cout << root->getInfo().mEmail << endl << endl;
 
 			if ( root->getRightTree() != NULL )
 				traverseIn( root->getRightTree() );
@@ -433,16 +420,20 @@ bool BSTree::saveTree( Node* root, int depth, ofstream& saveFile )
 	for ( int i = 0; i < depth; i++ )
 		output += "\t";
 
-	saveFile << output << root->getInfo().mPhone << endl;
-	saveFile << output << root->getInfo().mName << endl;
-	saveFile << output << root->getInfo().mAddress << endl;
-	saveFile << output << root->getInfo().mEmail << endl;
+	if ( root != NULL)
+	{
+		saveFile << output << root->getInfo().mPhone << endl;
+		saveFile << output << root->getInfo().mName << endl;
+		saveFile << output << root->getInfo().mAddress << endl;
+		saveFile << output << root->getInfo().mEmail << endl;
 
-	if ( root->getLeftTree() != NULL )
-		saveTree( root->getLeftTree(), depth + 1, saveFile );
+		if ( root->getLeftTree() != NULL )
+			saveTree( root->getLeftTree(), depth + 1, saveFile );
 
-	if ( root->getRightTree() != NULL )
-		saveTree( root->getRightTree(), depth + 1, saveFile );
+		if ( root->getRightTree() != NULL )
+			saveTree( root->getRightTree(), depth + 1, saveFile );
+	}
+
 
 	return true;
 

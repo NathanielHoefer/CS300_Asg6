@@ -16,6 +16,7 @@ Data:
 		a structure
 	- Node* mLeftTree: Pointer to left tree
 	- Node* mRightTree: Pointer to the right tree
+	- Node* mParent: Contains the pointer to the parent.
 
 Constructors:
 	+ Node() - Creates a node with default data
